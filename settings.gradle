@@ -2,6 +2,8 @@ rootProject.name = 'template'
 
 include 'application'
 include 'common'
-include 'boundedContextA'
-include 'boundedContextB'
-
+include 'entranceManagement'
+include 'parkTicketing'
+include 'staffing'
+include 'attractions'
+include 'infoPoints'
