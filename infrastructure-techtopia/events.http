@@ -1,0 +1,8 @@
+### visitor entering park
+POST {{baseURL}}/visitor/entered/1
+
+### visitor leaving park
+POST {{baseURL}}/visitor/left/1
+
+### buy a ticket valid for today
+POST {{baseURL}}/ticket/ef01c728-ce36-46b5-a110-84f53fdd9668/valid-on/2023-10-09

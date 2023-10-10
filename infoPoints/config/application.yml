@@ -1,9 +1,9 @@
 server:
-  port: ${PORT:8095}
-  servlet:
-    context-path: /ip
+    port: ${PORT:8095}
+    servlet:
+        context-path: /infoPoints
 
 
 spring:
-  config:
-    additional-location: ${SPRING_CONFIG_ADDITIONAL_LOCATION}
+    config:
+        additional-location: ${SPRING_CONFIG_ADDITIONAL_LOCATION}
