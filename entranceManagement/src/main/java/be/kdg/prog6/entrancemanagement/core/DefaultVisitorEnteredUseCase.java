@@ -37,13 +37,9 @@ public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
 			return false;
 		}
 
-		var optionalVisitor = visitorProjectionPort.loadVisitor(new Ticket.TicketUUID(ticketUUID));
-		if (optionalVisitor.isEmpty()) {
-			visitorUpdatePorts.forEach(port -> port.visitorEntered(new Visitor(new Visitor.VisitorUUID(UUID.randomUUID()), Visitor.State.ENTERED), ticketUUID, gateUUID));
-			return true;
-		}
+		var visitor = visitorProjectionPort.loadVisitor(new Ticket.TicketUUID(ticketUUID))
+		                                   .orElse(new Visitor(new Visitor.VisitorUUID(UUID.randomUUID()), null));
 
-		var visitor = optionalVisitor.get();
 		if (visitor.hasEntered()) {
 			log.warn("Visitor with uuid {} already entered", ticketUUID);
 			return false;
