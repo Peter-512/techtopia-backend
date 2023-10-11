@@ -7,5 +7,5 @@ import java.util.UUID;
 public interface VisitorUpdatePort {
 	void visitorEntered(Visitor visitor, UUID ticketUUID, UUID gateUUID);
 
-	void visitorLeft(UUID ticketUUID, UUID gateUUID);
+	void visitorLeft(Visitor visitor, UUID ticketUUID, UUID gateUUID);
 }

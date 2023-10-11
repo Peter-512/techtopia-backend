@@ -17,27 +17,14 @@ public class VisitorDBUpdateAdapter implements VisitorUpdatePort {
 	@Override
 	public void visitorEntered(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
 		log.info("Visitor entered");
-
-		final var optionalVisitor = visitorRepository.findByTicket(ticketUUID);
-		if (optionalVisitor.isEmpty()) {
-			var visitorJPA = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), ticketUUID, visitor.getState());
-			visitorRepository.save(visitorJPA);
-			return;
-		}
-
-		final var visitorJpa = optionalVisitor.get();
-		visitorRepository.save(visitorJpa);
+		var visitorJPA = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), ticketUUID, visitor.getState());
+		visitorRepository.save(visitorJPA);
 	}
 
 	@Override
-	public void visitorLeft(UUID ticketUUID, UUID gateUUID) {
+	public void visitorLeft(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
 		log.info("Visitor left");
-		var optionalVisitorJpa = visitorRepository.findByTicket(ticketUUID);
-		if (optionalVisitorJpa.isEmpty()) {
-			log.warn("Visitor with uuid {} not found", ticketUUID);
-			return;
-		}
-		final var visitorJpa = optionalVisitorJpa.get();
+		var visitorJpa = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), ticketUUID, visitor.getState());
 		visitorRepository.save(visitorJpa);
 	}
 }

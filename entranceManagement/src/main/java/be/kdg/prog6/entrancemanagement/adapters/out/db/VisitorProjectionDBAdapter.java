@@ -17,12 +17,12 @@ public class VisitorProjectionDBAdapter implements VisitorProjectionPort {
 
 	@Override
 	public Optional<Visitor> loadVisitor(Ticket.TicketUUID ticketUUID) {
-		var visitorEntity = visitorRepository.findByTicket(ticketUUID.uuid());
-		if (visitorEntity.isEmpty()) {
+		var optionalVisitorJpa = visitorRepository.findByTicket(ticketUUID.uuid());
+		if (optionalVisitorJpa.isEmpty()) {
 			return Optional.empty();
 		}
 
-		var visitorJPA = visitorEntity.get();
+		var visitorJPA = optionalVisitorJpa.get();
 		var visitor = new Visitor(new Visitor.VisitorUUID(visitorJPA.getVisitor()), visitorJPA.getState());
 		return Optional.of(visitor);
 	}

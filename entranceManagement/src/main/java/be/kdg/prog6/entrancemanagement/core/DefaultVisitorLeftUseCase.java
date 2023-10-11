@@ -36,7 +36,7 @@ public class DefaultVisitorLeftUseCase implements VisitorLeftUseCase {
 		}
 
 		visitor.leave();
-		visitorUpdatePorts.forEach(port -> port.visitorLeft(ticketUUID, gateUUID));
+		visitorUpdatePorts.forEach(port -> port.visitorLeft(visitor, ticketUUID, gateUUID));
 		return true;
 	}
 }

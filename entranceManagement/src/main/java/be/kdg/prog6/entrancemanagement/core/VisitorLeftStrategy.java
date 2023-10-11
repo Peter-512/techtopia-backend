@@ -2,13 +2,12 @@ package be.kdg.prog6.entrancemanagement.core;
 
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorLeftUseCase;
 import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
 // FIXME
 @AllArgsConstructor
-@Component
+//@Component
 public class VisitorLeftStrategy {
 	private final VisitorLeftUseCase visitorLeftUseCase;
 

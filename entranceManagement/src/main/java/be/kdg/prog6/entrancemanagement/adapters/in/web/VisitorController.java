@@ -26,7 +26,11 @@ public class VisitorController {
 	}
 
 	@PostMapping ("/visitor/leave/{ticketUUID}/gate/{gateUUID}")
-	public void visitorLeft(@PathVariable UUID ticketUUID, @PathVariable UUID gateUUID) {
-		visitorLeftUseCase.visitorLeft(ticketUUID, gateUUID);
+	public ResponseEntity<String> visitorLeft(@PathVariable UUID ticketUUID, @PathVariable UUID gateUUID) {
+		final boolean ticketValid = visitorLeftUseCase.visitorLeft(ticketUUID, gateUUID);
+		if (!ticketValid) {
+			return ResponseEntity.badRequest().body("Ticket not valid");
+		}
+		return ResponseEntity.ok().build();
 	}
 }

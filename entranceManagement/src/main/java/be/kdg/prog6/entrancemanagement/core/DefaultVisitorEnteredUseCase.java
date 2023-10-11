@@ -48,7 +48,7 @@ public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
 			log.warn("Visitor with uuid {} already entered", ticketUUID);
 			return false;
 		}
-		
+
 		visitor.enter();
 		visitorUpdatePorts.forEach(port -> port.visitorEntered(visitor, ticketUUID, gateUUID));
 		return true;

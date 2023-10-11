@@ -21,7 +21,7 @@ public class VisitorUpdatePublisher implements VisitorUpdatePort {
 	}
 
 	@Override
-	public void visitorLeft(UUID ticketUUID, UUID gateUUID) {
+	public void visitorLeft(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
 		publisher.publishEvent(new VisitorGateInteraction(ticketUUID, gateUUID, LocalDateTime.now(), Visitor.State.LEFT.name()));
 	}
 }
