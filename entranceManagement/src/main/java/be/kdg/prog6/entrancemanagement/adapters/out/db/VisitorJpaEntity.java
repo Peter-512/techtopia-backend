@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.NaturalId;
 
 import java.sql.Types;
 import java.util.UUID;
@@ -14,22 +13,30 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table (schema = "entrance", name = "entrance.visitor")
+@Table (name = "entrance_visitor")
 public class VisitorJpaEntity {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long id;
-	@NaturalId
 	@JdbcTypeCode (Types.VARCHAR)
 	@Setter
 	private UUID visitor;
 	@Setter
 	@JdbcTypeCode (Types.VARCHAR)
 	private UUID ticket;
+	@Enumerated (EnumType.STRING)
+	private Visitor.State state = Visitor.State.ENTERED;
 
-	public VisitorJpaEntity(Visitor visitor) {
-		this.visitor = visitor.getVisitorUUID().uuid();
-		this.ticket = visitor.getTicket().getTicketUUID().uuid();
+	public VisitorJpaEntity(UUID visitor, UUID ticket, Visitor.State state) {
+		this.visitor = visitor;
+		this.ticket = ticket;
+		this.state = state;
+	}
+
+	public void leave() {
+		this.state = Visitor.State.LEFT;
+	}
+
+	public void enter() {
+		this.state = Visitor.State.ENTERED;
 	}
 }

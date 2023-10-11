@@ -16,7 +16,7 @@ public class TicketProjectionDBAdapter implements TicketProjectionPort {
 
 	@Override
 	public Optional<Ticket> loadTicket(Ticket.TicketUUID ticketUUID) {
-		var ticketEntity = ticketRepository.findById(ticketUUID.uuid());
+		var ticketEntity = ticketRepository.findByTicket(ticketUUID.uuid());
 		return ticketEntity.map(TicketJpaEntity::toDomain);
 	}
 

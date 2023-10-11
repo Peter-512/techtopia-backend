@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 @Component
@@ -16,21 +15,22 @@ import java.util.Optional;
 public class VisitorProjectionDBAdapter implements VisitorProjectionPort {
 	private final VisitorRepository visitorRepository;
 
-
 	@Override
 	public Optional<Visitor> loadVisitor(Ticket.TicketUUID ticketUUID) {
 		var visitorEntity = visitorRepository.findByTicket(ticketUUID.uuid());
-		if (visitorEntity.isPresent()) {
-			var visitor = Visitor.enter(Ticket.create(new Ticket.TicketUUID(visitorEntity.get()
-			                                                                             .getTicket()), LocalDate.now()));
-			return Optional.of(visitor);
+		if (visitorEntity.isEmpty()) {
+			return Optional.empty();
 		}
-		return Optional.empty();
+
+		//		FIXME by creating the visitor like this here state=ENTERED which means in `DefaultVisitorEnteredUseCase` the visitor will be seen as already entered
+		var visitorJPA = visitorEntity.get();
+		var visitor = new Visitor(new Visitor.VisitorUUID(visitorJPA.getVisitor()), visitorJPA.getState());
+		return Optional.of(visitor);
 	}
 
 	@Override
 	public void saveVisitor(Visitor visitor) {
-		var visitorEntity = new VisitorJpaEntity(visitor);
-		visitorRepository.save(visitorEntity);
+		//		var visitorEntity = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), visitor.getState());
+		//		visitorRepository.save(visitorEntity);
 	}
 }

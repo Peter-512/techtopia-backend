@@ -12,12 +12,11 @@ public class Ticket {
 	private final TicketUUID ticketUUID;
 	private final LocalDate validOn;
 
-	private Ticket(TicketUUID ticketUUID, LocalDate validOn) {
+	public Ticket(TicketUUID ticketUUID, LocalDate validOn) {
 		this.ticketUUID = ticketUUID;
 		this.validOn = validOn;
 	}
 
-	//	NOTE: probably not necessary, should be in ticketing domain
 	public static Ticket create(TicketUUID ticketUUID, LocalDate validOn) {
 		return new Ticket(ticketUUID, validOn);
 	}

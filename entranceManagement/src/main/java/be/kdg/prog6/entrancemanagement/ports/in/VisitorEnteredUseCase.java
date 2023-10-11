@@ -1,5 +1,7 @@
 package be.kdg.prog6.entrancemanagement.ports.in;
 
+import java.util.UUID;
+
 public interface VisitorEnteredUseCase {
-	void visitorEntered(int amount);
+	boolean visitorEntered(UUID ticketUUID, UUID gateUUID);
 }

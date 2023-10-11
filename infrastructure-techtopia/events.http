@@ -1,8 +1,18 @@
 ### visitor entering park
-POST {{baseURL}}/visitor/entered/1
+POST {{baseURL}}/visitor/enter/{{ticketUUID}}/gate/{{$uuid}}
 
 ### visitor leaving park
-POST {{baseURL}}/visitor/left/1
+POST {{baseURL}}/visitor/leave/{{ticketUUID}}/gate/{{$uuid}}
 
 ### buy a ticket valid for today
-POST {{baseURL}}/ticket/ef01c728-ce36-46b5-a110-84f53fdd9668/valid-on/2023-10-09
+< {%
+	request.variables.set("today", new Date().toISOString().slice(0, 10));
+%}
+POST {{baseURL}}/ticket/{{ticketUUID}}/valid-on/{{today}}
+
+### buy a ticket valid for a specific day
+POST {{baseURL}}/ticket/{{nonValidTicketId}}/valid-on/{{date}}
+
+
+### enter park with not valid ticket
+POST {{baseURL}}/visitor/enter/{{nonValidTicketId}}/gate/{{$uuid}}

@@ -13,24 +13,28 @@ import java.util.UUID;
 @Setter
 public class Visitor {
 	private final VisitorUUID visitorUUID;
-	private final Ticket ticket;
+	private State state;
 
-	private Visitor(VisitorUUID visitorUUID, Ticket ticket) {
+	public Visitor(VisitorUUID visitorUUID, State state) {
 		this.visitorUUID = visitorUUID;
-		this.ticket = ticket;
+		this.state = state;
 	}
 
-	public static Visitor enter(Ticket ticket) {
-		return new Visitor(new VisitorUUID(UUID.randomUUID()), ticket);
+	public void enter() {
+		this.state = State.ENTERED;
 	}
 
-	public Visit enter(Gate gate) {
-		return Visit.start(this, gate);
+	public void leave() {
+		this.state = State.LEFT;
 	}
 
-	public void leaves(Gate.GateUUID gateUUID) {
-		//		TODO: implement
-		log.info("Visitor {} leaves through gate {}", this, gateUUID);
+	public boolean hasEntered() {
+		return state == State.ENTERED;
+	}
+
+	public enum State {
+		ENTERED,
+		LEFT
 	}
 
 	public record VisitorUUID(UUID uuid) {

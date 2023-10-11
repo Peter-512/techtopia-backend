@@ -1,12 +1,13 @@
 package be.kdg.prog6.entrancemanagement.adapters.out.db;
 
 import be.kdg.prog6.entrancemanagement.domain.Ticket;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.NaturalId;
 
 import java.sql.Types;
 import java.time.LocalDate;
@@ -15,14 +16,10 @@ import java.util.UUID;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table (schema = "entrance", name = "entrance.ticket")
+@Table (name = "entrance_ticket")
 public class TicketJpaEntity {
 
 	@Id
-	@GeneratedValue (strategy = GenerationType.IDENTITY)
-	private Long id;
-
-	@NaturalId
 	@JdbcTypeCode (Types.VARCHAR)
 	@Setter
 	private UUID ticket;

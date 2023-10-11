@@ -1,7 +1,9 @@
 package be.kdg.prog6.entrancemanagement.ports.out;
 
-public interface VisitorUpdatePort {
-	void visitorEntered(int amount);
+import java.util.UUID;
 
-	void visitorLeft(int amount);
+public interface VisitorUpdatePort {
+	void visitorEntered(UUID ticketUUID, UUID gateUUID);
+
+	void visitorLeft(UUID ticketUUID, UUID gateUUID);
 }
