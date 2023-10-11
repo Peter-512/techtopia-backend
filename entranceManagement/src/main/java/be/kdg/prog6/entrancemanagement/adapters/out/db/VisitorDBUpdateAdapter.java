@@ -13,26 +13,19 @@ import java.util.UUID;
 @AllArgsConstructor
 public class VisitorDBUpdateAdapter implements VisitorUpdatePort {
 	private final VisitorRepository visitorRepository;
-	private final TicketRepository ticketRepository;
 
 	@Override
-	public void visitorEntered(UUID ticketUUID, UUID gateUUID) {
+	public void visitorEntered(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
 		log.info("Visitor entered");
 
 		final var optionalVisitor = visitorRepository.findByTicket(ticketUUID);
-		final var optionalTicketJpa = ticketRepository.findByTicket(ticketUUID);
 		if (optionalVisitor.isEmpty()) {
-			var ticket = optionalTicketJpa.map(TicketJpaEntity::toDomain);
-			var visitor = ticket.map(v -> new Visitor(new Visitor.VisitorUUID(UUID.randomUUID()), Visitor.State.ENTERED));
-			var visitorJPA = visitor.map(v ->
-					new VisitorJpaEntity(v.getVisitorUUID().uuid(), ticketUUID, v.getState())
-			);
-			visitorJPA.ifPresent(visitorRepository::save);
+			var visitorJPA = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), ticketUUID, visitor.getState());
+			visitorRepository.save(visitorJPA);
 			return;
 		}
 
 		final var visitorJpa = optionalVisitor.get();
-		visitorJpa.enter();
 		visitorRepository.save(visitorJpa);
 	}
 
@@ -45,7 +38,6 @@ public class VisitorDBUpdateAdapter implements VisitorUpdatePort {
 			return;
 		}
 		final var visitorJpa = optionalVisitorJpa.get();
-		visitorJpa.leave();
 		visitorRepository.save(visitorJpa);
 	}
 }

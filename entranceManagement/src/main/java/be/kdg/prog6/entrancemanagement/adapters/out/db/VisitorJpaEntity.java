@@ -31,12 +31,4 @@ public class VisitorJpaEntity {
 		this.ticket = ticket;
 		this.state = state;
 	}
-
-	public void leave() {
-		this.state = Visitor.State.LEFT;
-	}
-
-	public void enter() {
-		this.state = Visitor.State.ENTERED;
-	}
 }

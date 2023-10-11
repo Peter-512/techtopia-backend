@@ -32,6 +32,10 @@ public class Visitor {
 		return state == State.ENTERED;
 	}
 
+	public boolean hasLeft() {
+		return state == State.LEFT;
+	}
+
 	public enum State {
 		ENTERED,
 		LEFT

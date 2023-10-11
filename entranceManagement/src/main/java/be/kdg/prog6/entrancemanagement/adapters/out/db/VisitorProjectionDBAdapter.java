@@ -22,7 +22,6 @@ public class VisitorProjectionDBAdapter implements VisitorProjectionPort {
 			return Optional.empty();
 		}
 
-		//		FIXME by creating the visitor like this here state=ENTERED which means in `DefaultVisitorEnteredUseCase` the visitor will be seen as already entered
 		var visitorJPA = visitorEntity.get();
 		var visitor = new Visitor(new Visitor.VisitorUUID(visitorJPA.getVisitor()), visitorJPA.getState());
 		return Optional.of(visitor);

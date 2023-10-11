@@ -1,6 +1,7 @@
 package be.kdg.prog6.entrancemanagement.core;
 
 import be.kdg.prog6.entrancemanagement.domain.Ticket;
+import be.kdg.prog6.entrancemanagement.domain.Visitor;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorEnteredUseCase;
 import be.kdg.prog6.entrancemanagement.ports.out.TicketProjectionPort;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorProjectionPort;
@@ -37,16 +38,19 @@ public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
 		}
 
 		var optionalVisitor = visitorProjectionPort.loadVisitor(new Ticket.TicketUUID(ticketUUID));
-		if (optionalVisitor.isPresent()) {
-			var visitor = optionalVisitor.get();
-			log.info("visitor: {}", visitor);
-			if (visitor.hasEntered()) {
-				log.warn("Visitor with uuid {} already entered", ticketUUID);
-				return false;
-			}
+		if (optionalVisitor.isEmpty()) {
+			visitorUpdatePorts.forEach(port -> port.visitorEntered(new Visitor(new Visitor.VisitorUUID(UUID.randomUUID()), Visitor.State.ENTERED), ticketUUID, gateUUID));
+			return true;
 		}
 
-		visitorUpdatePorts.forEach(port -> port.visitorEntered(ticketUUID, gateUUID));
+		var visitor = optionalVisitor.get();
+		if (visitor.hasEntered()) {
+			log.warn("Visitor with uuid {} already entered", ticketUUID);
+			return false;
+		}
+		
+		visitor.enter();
+		visitorUpdatePorts.forEach(port -> port.visitorEntered(visitor, ticketUUID, gateUUID));
 		return true;
 	}
 }

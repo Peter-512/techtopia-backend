@@ -20,7 +20,7 @@ public class LostTicketVisitorLeftUseCase implements VisitorLeftUseCase {
 
 	@Override
 	@Transactional
-	public void visitorLeft(UUID _uuid, UUID gateUUID) {
+	public boolean visitorLeft(UUID _uuid, UUID gateUUID) {
 		visitorUpdatePort.visitorLeft(LOST_TICKET_UUID, gateUUID);
 	}
 }
