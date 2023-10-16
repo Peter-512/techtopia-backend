@@ -1,7 +1,7 @@
-package be.kdg.prog6.parkticketing.adapter.out.publisher;
+package be.kdg.prog6.parkticketing.adapters.out.publisher;
 
-import be.kdg.prog6.common.events.TicketBoughtEvent;
 import be.kdg.prog6.parkticketing.domain.Ticket;
+import be.kdg.prog6.parkticketing.events.TicketBoughtEvent;
 import be.kdg.prog6.parkticketing.ports.out.TicketSoldPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

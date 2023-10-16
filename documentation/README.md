@@ -13,39 +13,39 @@
 
 ##### Events
 
-- VisitorLeft
-- VisitorEntered
-- TicketPurchase
-- TicketRefund
-- VisitorEnteredAttractionQueue
-- VisitorLeftAttractionQueue
-- AttractionQueueThresholdExceeded
-- AttractionQueueThresholdNotExceeded
-- RefreshmentStandOpened
-- RefreshmentStandClosed
-- HotelRoomBooked
+- [x] VisitorLeft
+- [x] VisitorEntered
+- [x] TicketPurchase
+- [x] ~~TicketRefund~~
+- [ ] VisitorEnteredAttractionQueue
+- [ ] VisitorLeftAttractionQueue
+- [ ] AttractionQueueThresholdExceeded
+- [ ] AttractionQueueThresholdNotExceeded
+- [ ] RefreshmentStandOpened
+- [ ] RefreshmentStandClosed
+- [x] ~~HotelRoomBooked~~
 
 ##### Commands
 
-- PayTicket
-- RefundTicket
-- OpenRefreshmentStand
-- CloseRefreshmentStand
-- EnableHighThroughputOnAttraction
-- DisableHighThroughputOnAttraction
+- [ ] PayTicket
+- [x] ~~RefundTicket~~
+- [ ] OpenRefreshmentStand
+- [ ] CloseRefreshmentStand
+- [ ] EnableHighThroughputOnAttraction
+- [ ] DisableHighThroughputOnAttraction
 
 ##### Use Cases
 
-- Visitor enters park
-- Visitor leaves park
-- Visitor buys ticket
-- Visitor refunds ticket
-- Visitor enters attraction queue
-- Visitor leaves attraction queue
-- Guest makes hotel reservation
-- Guest books hotel room
-- Guest checks in to hotel room
-- Guest checks out of hotel room
-- Guest cancels hotel booking
-- Forecast park attendance
-- Verify ticket validity
+- [x] Visitor enters park
+- [x] Visitor leaves park
+- [x] Visitor buys ticket
+- [x] ~~Visitor refunds ticket~~
+- [ ] Visitor enters attraction queue
+- [ ] Visitor leaves attraction queue
+- [x] ~~Guest makes hotel reservation~~
+- [x] ~~Guest books hotel room~~
+- [x] ~~Guest checks in to hotel room~~
+- [x] ~~Guest checks out of hotel room~~
+- [x] ~~Guest cancels hotel booking~~
+- [ ] Forecast park attendance
+- [x] Verify ticket validity

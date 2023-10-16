@@ -1,4 +1,4 @@
-package be.kdg.prog6.parkticketing.adapter.in.web;
+package be.kdg.prog6.parkticketing.adapters.in.web;
 
 import be.kdg.prog6.parkticketing.ports.in.TicketSoldUseCase;
 import lombok.AllArgsConstructor;

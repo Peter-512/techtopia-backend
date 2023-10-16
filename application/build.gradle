@@ -10,4 +10,7 @@ dependencies {
     implementation project(':staffing')
     implementation project(':attractions')
     implementation project(':infoPoints')
+
+    implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310"
+    implementation 'org.springframework.boot:spring-boot-starter-amqp'
 }

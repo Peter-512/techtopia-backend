@@ -15,16 +15,15 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @Table (name = "entrance_ticket")
 public class TicketJpaEntity {
 
 	@Id
 	@JdbcTypeCode (Types.VARCHAR)
-	@Setter
 	private UUID ticket;
 
-	@Setter
 	private LocalDate validOn;
 
 	public TicketJpaEntity(Ticket ticket) {
