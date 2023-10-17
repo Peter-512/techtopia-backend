@@ -1,4 +1,4 @@
-package be.kdg.prog6.attractions.adapters.auth;
+package be.kdg.prog6.attractions.adapters.config.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
