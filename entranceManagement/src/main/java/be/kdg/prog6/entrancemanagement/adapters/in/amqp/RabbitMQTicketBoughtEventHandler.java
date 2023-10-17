@@ -3,7 +3,7 @@ package be.kdg.prog6.entrancemanagement.adapters.in.amqp;
 import be.kdg.prog6.common.events.Event;
 import be.kdg.prog6.common.events.EventMessage;
 import be.kdg.prog6.common.facades.TechTopiaEventHandler;
-import be.kdg.prog6.entrancemanagement.adapters.config.RabbitMQModuleTopology;
+import be.kdg.prog6.entrancemanagement.adapters.config.amqp.RabbitMQModuleTopology;
 import be.kdg.prog6.entrancemanagement.ports.in.TicketBoughtPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

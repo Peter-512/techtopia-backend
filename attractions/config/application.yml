@@ -1,9 +1,16 @@
 server:
-  port: ${PORT:8092}
-  servlet:
-    context-path: /at
+    port: ${PORT:8092}
+    servlet:
+        context-path: /at
 
 
 spring:
-  config:
-    additional-location: ${SPRING_CONFIG_ADDITIONAL_LOCATION}
+    config:
+        additional-location: ${SPRING_CONFIG_ADDITIONAL_LOCATION}
+
+    security:
+        oauth2:
+            resourceserver:
+                jwt:
+                    jwk-set-uri: http://localhost:8180/realms/techtopia/protocol/openid-connect/certs
+                    issuer-uri: http://localhost:8180/realms/techtopia

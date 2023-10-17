@@ -3,7 +3,7 @@ package be.kdg.prog6.staffing.adapters.in;
 import be.kdg.prog6.common.events.Event;
 import be.kdg.prog6.common.events.EventMessage;
 import be.kdg.prog6.common.facades.TechTopiaEventHandler;
-import be.kdg.prog6.staffing.adapters.config.RabbitMQModuleTopology;
+import be.kdg.prog6.staffing.adapters.config.amqp.RabbitMQModuleTopology;
 import be.kdg.prog6.staffing.ports.in.VisitorGateInteractionPort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

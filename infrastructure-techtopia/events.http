@@ -1,18 +1,40 @@
+### Get access token with normal user
+
+POST http://localhost:8180/realms/techtopia/protocol/openid-connect/token HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+client_id = techtopia-be &
+client_secret = DfitZnoTBv2a6VQPCBnwBspWSZSSHN8N &
+username = peter &
+password = password &
+grant_type = password &
+scope = openid
+
+//saving the access token
+> {%
+	client.global.set("access_token", response.body.access_token);
+%}
+
 ### visitor entering park
 POST {{baseURL}}/visitor/enter/{{ticketUUID}}/gate/{{$uuid}}
+Authorization: Bearer {{access_token}}
 
 ### visitor leaving park
 POST {{baseURL}}/visitor/leave/{{ticketUUID}}/gate/{{$uuid}}
+Authorization: Bearer {{access_token}}
 
 ### buy a ticket valid for today
 < {%
 	request.variables.set("today", new Date().toISOString().slice(0, 10));
 %}
 POST {{baseURL}}/ticket/{{ticketUUID}}/valid-on/{{today}}
+Authorization: Bearer {{access_token}}
 
 ### buy a ticket valid for a specific day
 POST {{baseURL}}/ticket/{{nonValidTicketId}}/valid-on/{{date}}
+Authorization: Bearer {{access_token}}
 
 
 ### enter park with not valid ticket
 POST {{baseURL}}/visitor/enter/{{nonValidTicketId}}/gate/{{$uuid}}
+Authorization: Bearer {{access_token}}

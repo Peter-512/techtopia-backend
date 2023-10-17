@@ -4,7 +4,7 @@ import be.kdg.prog6.common.events.EventCatalog;
 import be.kdg.prog6.common.events.EventHeader;
 import be.kdg.prog6.common.events.EventMessage;
 import be.kdg.prog6.common.events.TicketBoughtEvent;
-import be.kdg.prog6.parkticketing.adapters.config.RabbitMQModuleTopology;
+import be.kdg.prog6.parkticketing.adapters.config.amqp.RabbitMQModuleTopology;
 import be.kdg.prog6.parkticketing.domain.Ticket;
 import be.kdg.prog6.parkticketing.ports.out.TicketSoldPort;
 import com.fasterxml.jackson.core.JsonProcessingException;

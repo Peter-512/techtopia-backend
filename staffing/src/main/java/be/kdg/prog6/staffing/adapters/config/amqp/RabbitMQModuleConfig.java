@@ -1,4 +1,4 @@
-package be.kdg.prog6.staffing.adapters.config;
+package be.kdg.prog6.staffing.adapters.config.amqp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;

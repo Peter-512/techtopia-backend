@@ -1,4 +1,4 @@
-package be.kdg.prog6.entrancemanagement.adapters.config;
+package be.kdg.prog6.parkticketing.adapters.config.amqp;
 
 import org.springframework.amqp.core.*;
 import org.springframework.context.annotation.Bean;

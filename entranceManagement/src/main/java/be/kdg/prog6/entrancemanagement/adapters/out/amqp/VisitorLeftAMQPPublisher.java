@@ -4,7 +4,7 @@ import be.kdg.prog6.common.events.EventCatalog;
 import be.kdg.prog6.common.events.EventHeader;
 import be.kdg.prog6.common.events.EventMessage;
 import be.kdg.prog6.common.events.VisitorGateInteraction;
-import be.kdg.prog6.entrancemanagement.adapters.config.RabbitMQModuleTopology;
+import be.kdg.prog6.entrancemanagement.adapters.config.amqp.RabbitMQModuleTopology;
 import be.kdg.prog6.entrancemanagement.domain.Visitor;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorUpdatePort;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,4 +1,4 @@
-package be.kdg.prog6.parkticketing.adapters.config;
+package be.kdg.prog6.parkticketing.adapters.config.amqp;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
