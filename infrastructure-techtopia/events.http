@@ -31,10 +31,15 @@ POST {{baseURL}}/ticket/{{ticketUUID}}/valid-on/{{today}}
 Authorization: Bearer {{access_token}}
 
 ### buy a ticket valid for a specific day
-POST {{baseURL}}/ticket/{{nonValidTicketId}}/valid-on/{{date}}
+POST {{baseURL}}/ticket/{{nonValidTicketID}}/valid-on/{{date}}
 Authorization: Bearer {{access_token}}
 
 
 ### enter park with not valid ticket
-POST {{baseURL}}/visitor/enter/{{nonValidTicketId}}/gate/{{$uuid}}
+POST {{baseURL}}/visitor/enter/{{nonValidTicketID}}/gate/{{$uuid}}
+Authorization: Bearer {{access_token}}
+
+
+### enqueue on attraction
+POST {{baseURL}}/attractions/{{attractionID}}/enqueue
 Authorization: Bearer {{access_token}}

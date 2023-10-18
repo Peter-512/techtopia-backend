@@ -1,10 +1,10 @@
 package be.kdg.prog6.entrancemanagement.core;
 
+import be.kdg.prog6.entrancemanagement.adapters.out.db.VisitorMapper;
 import be.kdg.prog6.entrancemanagement.domain.Ticket;
-import be.kdg.prog6.entrancemanagement.domain.Visitor;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorEnteredUseCase;
-import be.kdg.prog6.entrancemanagement.ports.out.TicketProjectionPort;
-import be.kdg.prog6.entrancemanagement.ports.out.VisitorProjectionPort;
+import be.kdg.prog6.entrancemanagement.ports.out.TicketPort;
+import be.kdg.prog6.entrancemanagement.ports.out.VisitorPort;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorUpdatePort;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -18,14 +18,15 @@ import java.util.UUID;
 @Service
 @Slf4j
 public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
-	private final TicketProjectionPort ticketProjectionPort;
-	private final VisitorProjectionPort visitorProjectionPort;
+	private final TicketPort ticketPort;
+	private final VisitorPort visitorPort;
 	private final List<VisitorUpdatePort> visitorUpdatePorts;
+	private final VisitorMapper mapper = VisitorMapper.INSTANCE;
 
 	@Override
 	@Transactional
 	public boolean visitorEntered(UUID ticketUUID, UUID gateUUID) {
-		var optionalTicket = ticketProjectionPort.loadTicket(new Ticket.TicketUUID(ticketUUID));
+		var optionalTicket = ticketPort.loadTicket(new Ticket.TicketUUID(ticketUUID));
 		if (optionalTicket.isEmpty()) {
 			log.warn("Ticket with uuid {} not found", ticketUUID);
 			return false;
@@ -37,8 +38,8 @@ public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
 			return false;
 		}
 
-		var visitor = visitorProjectionPort.loadVisitor(new Ticket.TicketUUID(ticketUUID))
-		                                   .orElse(new Visitor(new Visitor.VisitorUUID(UUID.randomUUID()), null));
+		var visitor = visitorPort.loadVisitor(new Ticket.TicketUUID(ticketUUID))
+		                         .orElse(mapper.create(ticketUUID));
 
 		if (visitor.hasEntered()) {
 			log.warn("Visitor with uuid {} already entered", ticketUUID);

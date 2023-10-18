@@ -1,6 +1,7 @@
 package be.kdg.prog6.entrancemanagement.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
@@ -11,14 +12,11 @@ import java.util.UUID;
 @Slf4j
 @ToString
 @Setter
+@NoArgsConstructor
 public class Visitor {
-	private final VisitorUUID visitorUUID;
+	private VisitorUUID visitorUUID;
+	private Ticket.TicketUUID ticketUUID;
 	private State state;
-
-	public Visitor(VisitorUUID visitorUUID, State state) {
-		this.visitorUUID = visitorUUID;
-		this.state = state;
-	}
 
 	public void enter() {
 		this.state = State.ENTERED;

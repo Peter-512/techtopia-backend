@@ -12,23 +12,16 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @NoArgsConstructor
 @Table (name = "entrance_visitor")
 public class VisitorJpaEntity {
 
 	@Id
 	@JdbcTypeCode (Types.VARCHAR)
-	@Setter
 	private UUID visitor;
-	@Setter
 	@JdbcTypeCode (Types.VARCHAR)
 	private UUID ticket;
 	@Enumerated (EnumType.STRING)
 	private Visitor.State state = Visitor.State.ENTERED;
-
-	public VisitorJpaEntity(UUID visitor, UUID ticket, Visitor.State state) {
-		this.visitor = visitor;
-		this.ticket = ticket;
-		this.state = state;
-	}
 }

@@ -5,6 +5,7 @@ import be.kdg.prog6.common.events.EventCatalog;
 import be.kdg.prog6.common.events.VisitorGateInteraction;
 import be.kdg.prog6.common.facades.TechTopiaEventHandler;
 import be.kdg.prog6.staffing.domain.Park;
+import be.kdg.prog6.staffing.ports.in.SaveVisitorGateInteractionEventUseCase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class VisitorGateInteractionAMQPAdapter implements TechTopiaEventHandler<VisitorGateInteraction> {
 	private final ObjectMapper objectMapper;
+	private final SaveVisitorGateInteractionEventUseCase saveVisitorGateInteractionEventUseCase;
 
 	@Override
 	public boolean appliesTo(EventCatalog eventType) {
@@ -34,10 +36,7 @@ public class VisitorGateInteractionAMQPAdapter implements TechTopiaEventHandler<
 	@Override
 	public void handle(Event eventBody, EventCatalog eventType) {
 		log.info("EVENT +++++++++ VISITOR WENT THROUGH GATE +++++++++ event: {}", eventBody);
-		if (eventType.equals(EventCatalog.VISITOR_ENTERED)) {
-			Park.instance().addVisitor();
-		} else if (eventType.equals(EventCatalog.VISITOR_LEFT)) {
-			Park.instance().removeVisitor();
-		}
+		saveVisitorGateInteractionEventUseCase.save((VisitorGateInteraction) eventBody, eventType);
+		log.info("Park: {}", Park.instance());
 	}
 }

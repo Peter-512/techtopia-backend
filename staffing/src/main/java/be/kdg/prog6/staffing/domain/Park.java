@@ -2,16 +2,17 @@ package be.kdg.prog6.staffing.domain;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 
+@Getter
 @Slf4j
+@ToString
 public class Park {
 
 	private static final Park INSTANCE = new Park();
-	@Getter
 	@Setter
 	private Weather weather;
-	@Getter
 	private int visitors;
 
 	private Park() {

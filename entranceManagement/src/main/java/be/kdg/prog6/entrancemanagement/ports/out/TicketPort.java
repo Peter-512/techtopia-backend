@@ -4,7 +4,7 @@ import be.kdg.prog6.entrancemanagement.domain.Ticket;
 
 import java.util.Optional;
 
-public interface TicketProjectionPort {
+public interface TicketPort {
 	Optional<Ticket> loadTicket(Ticket.TicketUUID ticketUUID);
 
 	void saveTicket(Ticket ticket);

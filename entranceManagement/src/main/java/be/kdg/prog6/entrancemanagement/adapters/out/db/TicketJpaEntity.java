@@ -1,6 +1,5 @@
 package be.kdg.prog6.entrancemanagement.adapters.out.db;
 
-import be.kdg.prog6.entrancemanagement.domain.Ticket;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -25,13 +24,4 @@ public class TicketJpaEntity {
 	private UUID ticket;
 
 	private LocalDate validOn;
-
-	public TicketJpaEntity(Ticket ticket) {
-		this.ticket = ticket.getTicketUUID().uuid();
-		this.validOn = ticket.getValidOn();
-	}
-
-	public Ticket toDomain() {
-		return Ticket.create(new Ticket.TicketUUID(ticket), validOn);
-	}
 }

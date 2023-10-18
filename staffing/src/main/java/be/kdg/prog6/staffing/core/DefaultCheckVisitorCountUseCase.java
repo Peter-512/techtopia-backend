@@ -7,11 +7,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class DefaultCheckVisitorCountUseCase implements CheckVisitorCountUseCase {
 
-
 	@Override
 	public void checkVisitorCount() {
 		final int visitors = Park.instance().getVisitors();
-
-		
 	}
 }

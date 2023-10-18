@@ -13,18 +13,17 @@ import java.util.UUID;
 @AllArgsConstructor
 public class VisitorDBUpdateAdapter implements VisitorUpdatePort {
 	private final VisitorRepository visitorRepository;
+	private final VisitorMapper mapper = VisitorMapper.INSTANCE;
 
 	@Override
 	public void visitorEntered(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
 		log.info("Visitor entered");
-		var visitorJPA = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), ticketUUID, visitor.getState());
-		visitorRepository.save(visitorJPA);
+		visitorRepository.save(mapper.map(visitor));
 	}
 
 	@Override
 	public void visitorLeft(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
 		log.info("Visitor left");
-		var visitorJpa = new VisitorJpaEntity(visitor.getVisitorUUID().uuid(), ticketUUID, visitor.getState());
-		visitorRepository.save(visitorJpa);
+		visitorRepository.save(mapper.map(visitor));
 	}
 }

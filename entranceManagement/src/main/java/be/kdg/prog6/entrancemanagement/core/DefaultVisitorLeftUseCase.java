@@ -2,7 +2,7 @@ package be.kdg.prog6.entrancemanagement.core;
 
 import be.kdg.prog6.entrancemanagement.domain.Ticket;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorLeftUseCase;
-import be.kdg.prog6.entrancemanagement.ports.out.VisitorProjectionPort;
+import be.kdg.prog6.entrancemanagement.ports.out.VisitorPort;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorUpdatePort;
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -16,13 +16,13 @@ import java.util.UUID;
 @Service
 @Slf4j
 public class DefaultVisitorLeftUseCase implements VisitorLeftUseCase {
-	private final VisitorProjectionPort visitorProjectionPort;
+	private final VisitorPort visitorPort;
 	private final List<VisitorUpdatePort> visitorUpdatePorts;
 
 	@Override
 	@Transactional
 	public boolean visitorLeft(UUID ticketUUID, UUID gateUUID) {
-		var optionalVisitor = visitorProjectionPort.loadVisitor(new Ticket.TicketUUID(ticketUUID));
+		var optionalVisitor = visitorPort.loadVisitor(new Ticket.TicketUUID(ticketUUID));
 
 		if (optionalVisitor.isEmpty()) {
 			log.warn("Ticket with uuid {} not found", ticketUUID);

@@ -1,41 +1,43 @@
 package be.kdg.prog6.attractions.domain;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.UUID;
 
 @Getter
 @Setter
+@NoArgsConstructor
+@ToString
 public class Attraction {
-	private final AttractionUUID attractionUUID;
-	private final int mediumThreshold;
-	private final int highThreshold;
+	private AttractionUUID attractionUUID;
+	private int highThreshold;
 	private int currentVisitors;
 	private THROUGHPUT throughput;
 
-	public Attraction(AttractionUUID attractionUUID, int mediumThreshold, int highThreshold) {
-		this.attractionUUID = attractionUUID;
-		this.mediumThreshold = mediumThreshold;
-		this.highThreshold = highThreshold;
-		this.currentVisitors = 0;
-		this.throughput = THROUGHPUT.LOW;
+	public Attraction(AttractionUUID attractionUUID, int highThreshold) {
+		this(attractionUUID, highThreshold, 0, THROUGHPUT.LOW);
 	}
 
-	public void visitorEntersQueue() {
+	public Attraction(AttractionUUID attractionUUID, int highThreshold, int currentVisitors, THROUGHPUT throughput) {
+		this.attractionUUID = attractionUUID;
+		this.highThreshold = highThreshold;
+		this.currentVisitors = currentVisitors;
+		this.throughput = throughput;
+	}
+
+	public void enqueue() {
 		currentVisitors++;
 	}
 
-	public void visitorLeavesQueue() {
+	public void dequeue() {
 		currentVisitors--;
 	}
-	
+
 	public void setHighThroughput() {
 		this.throughput = THROUGHPUT.HIGH;
-	}
-
-	public void setMediumThroughput() {
-		this.throughput = THROUGHPUT.MEDIUM;
 	}
 
 	public void setLowThroughput() {
@@ -44,7 +46,6 @@ public class Attraction {
 
 	public enum THROUGHPUT {
 		LOW,
-		MEDIUM,
 		HIGH
 	}
 

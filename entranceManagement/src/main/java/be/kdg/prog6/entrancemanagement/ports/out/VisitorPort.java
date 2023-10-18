@@ -5,7 +5,7 @@ import be.kdg.prog6.entrancemanagement.domain.Visitor;
 
 import java.util.Optional;
 
-public interface VisitorProjectionPort {
+public interface VisitorPort {
 	Optional<Visitor> loadVisitor(Ticket.TicketUUID ticketUUID);
 
 	void saveVisitor(Visitor visitor);
