@@ -3,7 +3,7 @@ package be.kdg.prog6.entrancemanagement.core;
 import be.kdg.prog6.entrancemanagement.adapters.out.db.VisitorMapper;
 import be.kdg.prog6.entrancemanagement.domain.Ticket;
 import be.kdg.prog6.entrancemanagement.ports.in.TransitionVisitorCommand;
-import be.kdg.prog6.entrancemanagement.ports.in.VisitorEnteredUseCase;
+import be.kdg.prog6.entrancemanagement.ports.in.VisitorEnteringUseCase;
 import be.kdg.prog6.entrancemanagement.ports.out.TicketPort;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorGateTransitionCommand;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorPort;
@@ -18,7 +18,7 @@ import java.util.List;
 @AllArgsConstructor
 @Service
 @Slf4j
-public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
+public class DefaultVisitorEnteringUseCase implements VisitorEnteringUseCase {
 	private final TicketPort ticketPort;
 	private final VisitorPort visitorPort;
 	private final List<VisitorUpdatePort> visitorUpdatePorts;
@@ -26,7 +26,7 @@ public class DefaultVisitorEnteredUseCase implements VisitorEnteredUseCase {
 
 	@Override
 	@Transactional
-	public boolean visitorEntered(TransitionVisitorCommand command) {
+	public boolean visitorEntering(TransitionVisitorCommand command) {
 		var ticketUUID = new Ticket.TicketUUID(command.ticketUUID());
 		var optionalTicket = ticketPort.loadTicket(ticketUUID);
 		if (optionalTicket.isEmpty()) {
