@@ -1,5 +1,6 @@
 package be.kdg.prog6.parkticketing.adapters.in.web;
 
+import be.kdg.prog6.common.events.TicketBoughtEvent;
 import be.kdg.prog6.parkticketing.ports.in.TicketSoldUseCase;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,6 @@ public class TicketController {
 
 	@PostMapping ("/ticket/{ticketUUID}/valid-on/{validOn}")
 	public void buyTicket(@PathVariable UUID ticketUUID, @PathVariable LocalDate validOn) {
-		ticketBoughtUseCase.buyTicket(ticketUUID, validOn);
+		ticketBoughtUseCase.saveTicketSale(new TicketBoughtEvent(ticketUUID, validOn));
 	}
 }

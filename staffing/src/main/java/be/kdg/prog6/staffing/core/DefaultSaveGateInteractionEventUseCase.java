@@ -16,7 +16,7 @@ public class DefaultSaveGateInteractionEventUseCase implements SaveVisitorGateIn
 
 	@Override
 	@Transactional
-	public void save(VisitorGateInteraction event, EventCatalog eventType) {
+	public void registerGateInteraction(VisitorGateInteraction event, EventCatalog eventType) {
 		switch (eventType) {
 			case VISITOR_ENTERED -> Park.instance().addVisitor();
 			case VISITOR_LEFT -> Park.instance().removeVisitor();

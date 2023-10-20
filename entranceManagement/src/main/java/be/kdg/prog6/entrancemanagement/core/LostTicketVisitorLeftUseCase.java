@@ -1,5 +1,6 @@
 package be.kdg.prog6.entrancemanagement.core;
 
+import be.kdg.prog6.entrancemanagement.ports.in.TransitionVisitorCommand;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorLeftUseCase;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorUpdatePort;
 import jakarta.transaction.Transactional;
@@ -20,7 +21,7 @@ public class LostTicketVisitorLeftUseCase implements VisitorLeftUseCase {
 
 	@Override
 	@Transactional
-	public boolean visitorLeft(UUID _uuid, UUID gateUUID) {
+	public boolean visitorLeft(TransitionVisitorCommand command) {
 		//		visitorUpdatePort.visitorLeft(new Visitor(), LOST_TICKET_UUID);
 		return true;
 	}

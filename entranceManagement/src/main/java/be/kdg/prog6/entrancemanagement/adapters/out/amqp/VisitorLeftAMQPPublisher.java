@@ -5,7 +5,7 @@ import be.kdg.prog6.common.events.EventHeader;
 import be.kdg.prog6.common.events.EventMessage;
 import be.kdg.prog6.common.events.VisitorGateInteraction;
 import be.kdg.prog6.entrancemanagement.adapters.config.amqp.RabbitMQModuleTopology;
-import be.kdg.prog6.entrancemanagement.domain.Visitor;
+import be.kdg.prog6.entrancemanagement.ports.out.VisitorGateTransitionCommand;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorUpdatePort;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,15 +26,18 @@ public class VisitorLeftAMQPPublisher implements VisitorUpdatePort {
 	private final ObjectMapper objectMapper;
 
 	@Override
-	public void visitorEntered(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
+	public void visitorEntered(VisitorGateTransitionCommand command) {
 		log.info("Publishing event that visitor left");
 
 		var eventHeader = EventHeader.builder()
 		                             .eventID(UUID.randomUUID())
 		                             .eventCatalog(EventCatalog.VISITOR_ENTERED)
 		                             .build();
-		var eventBody = new VisitorGateInteraction(ticketUUID, gateUUID, LocalDateTime.now(), visitor.getState()
-		                                                                                             .name());
+		var eventBody = new VisitorGateInteraction(
+				command.ticketUUID(),
+				command.gateUUID(),
+				LocalDateTime.now(),
+				command.visitor().getState().name());
 		try {
 			rabbitTemplate.convertAndSend(RabbitMQModuleTopology.TECHTOPIA_EVENTS_FAN_OUT, "entrance.visitor.entered",
 					EventMessage.builder()
@@ -47,15 +50,18 @@ public class VisitorLeftAMQPPublisher implements VisitorUpdatePort {
 	}
 
 	@Override
-	public void visitorLeft(Visitor visitor, UUID ticketUUID, UUID gateUUID) {
+	public void visitorLeft(VisitorGateTransitionCommand command) {
 		log.info("Publishing event that visitor left");
 
 		var eventHeader = EventHeader.builder()
 		                             .eventID(UUID.randomUUID())
 		                             .eventCatalog(EventCatalog.VISITOR_LEFT)
 		                             .build();
-		var eventBody = new VisitorGateInteraction(ticketUUID, gateUUID, LocalDateTime.now(), visitor.getState()
-		                                                                                             .name());
+		var eventBody = new VisitorGateInteraction(
+				command.ticketUUID(),
+				command.gateUUID(),
+				LocalDateTime.now(),
+				command.visitor().getState().name());
 		try {
 			rabbitTemplate.convertAndSend(RabbitMQModuleTopology.TECHTOPIA_EVENTS_FAN_OUT, "entrance.visitor.left",
 					EventMessage.builder()

@@ -1,8 +1,7 @@
 package be.kdg.prog6.parkticketing.ports.in;
 
-import java.time.LocalDate;
-import java.util.UUID;
+import be.kdg.prog6.common.events.TicketBoughtEvent;
 
 public interface TicketSoldUseCase {
-	void buyTicket(UUID uuid, LocalDate validOn);
+	void saveTicketSale(TicketBoughtEvent event);
 }

@@ -6,8 +6,5 @@ import java.util.Optional;
 import java.util.UUID;
 
 public interface VisitorRepository extends JpaRepository<VisitorJpaEntity, UUID> {
-	Optional<VisitorJpaEntity> findByVisitor(UUID uuid);
-
 	Optional<VisitorJpaEntity> findByTicket(UUID uuid);
-
 }

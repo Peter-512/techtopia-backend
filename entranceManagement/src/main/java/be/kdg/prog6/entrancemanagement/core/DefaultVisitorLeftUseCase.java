@@ -1,7 +1,9 @@
 package be.kdg.prog6.entrancemanagement.core;
 
 import be.kdg.prog6.entrancemanagement.domain.Ticket;
+import be.kdg.prog6.entrancemanagement.ports.in.TransitionVisitorCommand;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorLeftUseCase;
+import be.kdg.prog6.entrancemanagement.ports.out.VisitorGateTransitionCommand;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorPort;
 import be.kdg.prog6.entrancemanagement.ports.out.VisitorUpdatePort;
 import jakarta.transaction.Transactional;
@@ -10,7 +12,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.UUID;
 
 @AllArgsConstructor
 @Service
@@ -21,8 +22,9 @@ public class DefaultVisitorLeftUseCase implements VisitorLeftUseCase {
 
 	@Override
 	@Transactional
-	public boolean visitorLeft(UUID ticketUUID, UUID gateUUID) {
-		var optionalVisitor = visitorPort.loadVisitor(new Ticket.TicketUUID(ticketUUID));
+	public boolean visitorLeft(TransitionVisitorCommand command) {
+		var ticketUUID = new Ticket.TicketUUID(command.ticketUUID());
+		var optionalVisitor = visitorPort.loadVisitor(ticketUUID);
 
 		if (optionalVisitor.isEmpty()) {
 			log.warn("Ticket with uuid {} not found", ticketUUID);
@@ -36,7 +38,7 @@ public class DefaultVisitorLeftUseCase implements VisitorLeftUseCase {
 		}
 
 		visitor.leave();
-		visitorUpdatePorts.forEach(port -> port.visitorLeft(visitor, ticketUUID, gateUUID));
+		visitorUpdatePorts.forEach(port -> port.visitorLeft(new VisitorGateTransitionCommand(visitor, command.ticketUUID(), command.gateUUID())));
 		return true;
 	}
 }

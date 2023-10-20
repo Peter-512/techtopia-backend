@@ -1,5 +1,6 @@
 package be.kdg.prog6.entrancemanagement.adapters.in.web;
 
+import be.kdg.prog6.entrancemanagement.ports.in.TransitionVisitorCommand;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorEnteredUseCase;
 import be.kdg.prog6.entrancemanagement.ports.in.VisitorLeftUseCase;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ public class VisitorController {
 
 	@PostMapping ("/visitor/enter/{ticketUUID}/gate/{gateUUID}")
 	public ResponseEntity<String> visitorEntered(@PathVariable UUID ticketUUID, @PathVariable UUID gateUUID) {
-		final boolean ticketValid = visitorEnteredUseCase.visitorEntered(ticketUUID, gateUUID);
+		final boolean ticketValid = visitorEnteredUseCase.visitorEntered(new TransitionVisitorCommand(ticketUUID, gateUUID));
 		if (!ticketValid) {
 			return ResponseEntity.badRequest().body("Ticket not valid");
 		}
@@ -27,7 +28,7 @@ public class VisitorController {
 
 	@PostMapping ("/visitor/leave/{ticketUUID}/gate/{gateUUID}")
 	public ResponseEntity<String> visitorLeft(@PathVariable UUID ticketUUID, @PathVariable UUID gateUUID) {
-		final boolean ticketValid = visitorLeftUseCase.visitorLeft(ticketUUID, gateUUID);
+		final boolean ticketValid = visitorLeftUseCase.visitorLeft(new TransitionVisitorCommand(ticketUUID, gateUUID));
 		if (!ticketValid) {
 			return ResponseEntity.badRequest().body("Ticket not valid");
 		}

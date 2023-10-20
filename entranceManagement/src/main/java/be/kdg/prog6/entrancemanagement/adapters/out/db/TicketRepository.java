@@ -9,5 +9,4 @@ import java.util.UUID;
 @Repository
 public interface TicketRepository extends JpaRepository<TicketJpaEntity, UUID> {
 	Optional<TicketJpaEntity> findByTicket(UUID ticket);
-
 }

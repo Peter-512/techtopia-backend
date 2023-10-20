@@ -36,7 +36,7 @@ public class VisitorGateInteractionAMQPAdapter implements TechTopiaEventHandler<
 	@Override
 	public void handle(Event eventBody, EventCatalog eventType) {
 		log.info("EVENT +++++++++ VISITOR WENT THROUGH GATE +++++++++ event: {}", eventBody);
-		saveVisitorGateInteractionEventUseCase.save((VisitorGateInteraction) eventBody, eventType);
+		saveVisitorGateInteractionEventUseCase.registerGateInteraction((VisitorGateInteraction) eventBody, eventType);
 		log.info("Park: {}", Park.instance());
 	}
 }
