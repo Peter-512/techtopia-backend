@@ -10,13 +10,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 
 @Slf4j
 @Component
 @AllArgsConstructor
 public class RabbitMQVisitorGateInteractionEventHandler implements VisitorGateInteractionPort {
 	private final List<TechTopiaEventHandler<? extends Event>> eventHandlers;
+	private final Set<UUID> eventStore = new HashSet<>();
 
 	@Override
 	@RabbitListener (queues = RabbitMQModuleTopology.GATE_INTERACTION_EVENTS_QUEUE, messageConverter = "#{jackson2JsonMessageConverter}")
@@ -25,7 +29,9 @@ public class RabbitMQVisitorGateInteractionEventHandler implements VisitorGateIn
 		eventHandlers.stream()
 		             .filter(eventHandler -> eventHandler.appliesTo(eventMessage.getEventHeader().getEventType()))
 		             .forEach(eventHandler -> eventHandler.receive(eventMessage)
-		                                                  .handle(eventHandler.map(eventMessage.getEventBody()),
-				                                                  eventMessage.getEventHeader().getEventType()));
+		                                                  .ifPresent(handler -> handler
+				                                                  .handle(eventHandler.map(eventMessage.getEventBody()),
+						                                                  eventMessage.getEventHeader()
+						                                                              .getEventType())));
 	}
 }

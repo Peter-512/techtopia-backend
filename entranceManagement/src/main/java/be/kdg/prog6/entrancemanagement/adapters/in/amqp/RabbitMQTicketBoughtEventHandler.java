@@ -25,7 +25,9 @@ public class RabbitMQTicketBoughtEventHandler implements TicketBoughtPort {
 		eventHandlers.stream()
 		             .filter(eventHandler -> eventHandler.appliesTo(eventMessage.getEventHeader().getEventType()))
 		             .forEach(eventHandler -> eventHandler.receive(eventMessage)
-		                                                  .handle(eventHandler.map(eventMessage.getEventBody()),
-				                                                  eventMessage.getEventHeader().getEventType()));
+		                                                  .ifPresent(handler -> handler
+				                                                  .handle(eventHandler.map(eventMessage.getEventBody()),
+						                                                  eventMessage.getEventHeader()
+						                                                              .getEventType())));
 	}
 }
