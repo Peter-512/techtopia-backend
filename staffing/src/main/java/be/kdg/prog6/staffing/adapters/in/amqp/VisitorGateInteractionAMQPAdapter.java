@@ -1,4 +1,4 @@
-package be.kdg.prog6.staffing.adapters.in;
+package be.kdg.prog6.staffing.adapters.in.amqp;
 
 import be.kdg.prog6.common.events.Event;
 import be.kdg.prog6.common.events.EventCatalog;

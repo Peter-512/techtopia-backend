@@ -43,3 +43,31 @@ Authorization: Bearer {{access_token}}
 ### enqueue on attraction
 POST {{baseURL}}/attractions/{{attractionID}}/enqueue
 Authorization: Bearer {{access_token}}
+
+
+### forecast weather
+GET {{baseURL}}/weather/{{date}}
+Authorization: Bearer {{access_token}}
+
+
+### forecast weather for today
+< {%
+	request.variables.set("today", new Date().toISOString().slice(0, 10));
+%}
+GET {{baseURL}}/weather/{{today}}
+Authorization: Bearer {{access_token}}
+
+
+### emptying cache for weather forecast
+DELETE {{baseURL}}/cache/weather
+Authorization: Bearer {{access_token}}
+
+
+### forecast visitor count
+GET {{baseURL}}/forecast/{{date}}
+Authorization: Bearer {{access_token}}
+
+
+### emptying cache for visitor forecast
+DELETE {{baseURL}}/cache/forecast
+Authorization: Bearer {{access_token}}
