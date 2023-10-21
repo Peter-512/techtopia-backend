@@ -35,7 +35,7 @@ public class TicketBoughtAMQPAdapter implements TechTopiaEventHandler<TicketBoug
 		final UUID eventID = eventMessage.getEventHeader().getEventID();
 		final boolean isDuplicate = eventStore.contains(eventID);
 
-		log.error(isDuplicate ? "Duplicate event" : "New event");
+		log.info(isDuplicate ? "Duplicate event" : "New event");
 
 		if (isDuplicate) {
 			return Optional.empty();
