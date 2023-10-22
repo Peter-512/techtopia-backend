@@ -5,4 +5,5 @@ public enum EventCatalog {
 	TICKET_BOUGHT,
 	VISITOR_ENTERED,
 	VISITOR_LEFT,
+	ATTRACTION_CHANGED,
 }

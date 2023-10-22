@@ -11,6 +11,8 @@ public class RabbitMQTopology {
 	public static final String GATE_INTERACTION_EVENTS_QUEUE = "gate-interaction-queue";
 	public static final String TICKET_BOUGHT_QUEUE = "ticket-bought-queue";
 	public static final String SAVE_TICKET_COMMANDS = "save-ticket-commands";
+	public static final String ATTRACTION_CHANGED_QUEUE = "attraction-changed-queue";
+	public static final String ATTRACTION_CHANGED_COMMANDS = "attraction-changed-commands";
 
 	@Bean
 	FanoutExchange techtopiaEventsExchange() {
@@ -43,5 +45,22 @@ public class RabbitMQTopology {
 		return BindingBuilder.bind(ticketBoughtEventsQueue)
 		                     .to(saveTicketCommandExchange)
 		                     .with("ticket.#");
+	}
+
+	@Bean
+	TopicExchange attractionChangedExchange() {
+		return new TopicExchange(ATTRACTION_CHANGED_COMMANDS);
+	}
+
+	@Bean
+	Queue attractionChangedQueue() {
+		return new Queue(ATTRACTION_CHANGED_QUEUE);
+	}
+
+	@Bean
+	Binding attractionChangedBinding(TopicExchange attractionChangedExchange, Queue attractionChangedQueue) {
+		return BindingBuilder.bind(attractionChangedQueue)
+		                     .to(attractionChangedExchange)
+		                     .with("attraction.#");
 	}
 }

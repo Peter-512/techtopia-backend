@@ -36,12 +36,24 @@ public class Attraction {
 		currentVisitors--;
 	}
 
-	public void setHighThroughput() {
+	private void setHighThroughput() {
 		this.throughput = THROUGHPUT.HIGH;
 	}
 
-	public void setLowThroughput() {
+	private void setLowThroughput() {
 		this.throughput = THROUGHPUT.LOW;
+	}
+
+	private boolean isHighThroughput() {
+		return this.throughput == THROUGHPUT.HIGH;
+	}
+
+	public void adjustThroughput() {
+		if (isHighThroughput() && currentVisitors < highThreshold * 0.8) {
+			setLowThroughput();
+		} else if (!isHighThroughput() && currentVisitors > highThreshold) {
+			setHighThroughput();
+		}
 	}
 
 	public enum THROUGHPUT {
