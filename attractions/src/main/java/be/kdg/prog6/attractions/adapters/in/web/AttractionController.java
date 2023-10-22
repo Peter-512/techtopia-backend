@@ -1,6 +1,8 @@
 package be.kdg.prog6.attractions.adapters.in.web;
 
 import be.kdg.prog6.attractions.domain.Attraction;
+import be.kdg.prog6.attractions.ports.in.DequeueCommand;
+import be.kdg.prog6.attractions.ports.in.DequeuingUseCase;
 import be.kdg.prog6.attractions.ports.in.EnqueueCommand;
 import be.kdg.prog6.attractions.ports.in.EnqueuingUseCase;
 import lombok.AllArgsConstructor;
@@ -14,10 +16,16 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AttractionController {
 	private final EnqueuingUseCase enqueuingUseCase;
+	private final DequeuingUseCase dequeuingUseCase;
 
 	@PostMapping ("/attractions/{attractionUUID}/enqueue")
 	public void enqueue(@PathVariable UUID attractionUUID) {
 		enqueuingUseCase.enqueue(new EnqueueCommand(new Attraction.AttractionUUID(attractionUUID)));
 
+	}
+
+	@PostMapping ("/attractions/{attractionUUID}/dequeue")
+	public void dequeue(@PathVariable UUID attractionUUID) {
+		dequeuingUseCase.dequeue(new DequeueCommand(new Attraction.AttractionUUID(attractionUUID)));
 	}
 }

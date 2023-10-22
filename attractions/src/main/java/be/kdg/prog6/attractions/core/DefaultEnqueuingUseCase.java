@@ -29,9 +29,7 @@ public class DefaultEnqueuingUseCase implements EnqueuingUseCase {
 		}
 		var attraction = optionalAttraction.get();
 		attraction.enqueue();
-
 		attraction.adjustThroughput();
-
 		attractionUpdatePort.forEach(port -> port.updateAttraction(attraction));
 	}
 }

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.JdbcTypeCode;
 
 import java.sql.Types;
@@ -29,4 +30,7 @@ public class AttractionJpaEntity {
 
 	@Enumerated (EnumType.STRING)
 	private Attraction.THROUGHPUT throughput;
+
+	@ColumnDefault ("0")
+	private int currentWaitingTime;
 }

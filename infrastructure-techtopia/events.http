@@ -53,6 +53,11 @@ POST {{baseURL}}/attractions/{{attractionID}}/enqueue
 Authorization: Bearer {{access_token}}
 
 
+### dequeue on attraction
+POST {{baseURL}}/attractions/{{attractionID}}/dequeue
+Authorization: Bearer {{access_token}}
+
+
 ### forecast weather
 GET {{baseURL}}/weather/{{date}}
 Authorization: Bearer {{access_token}}
