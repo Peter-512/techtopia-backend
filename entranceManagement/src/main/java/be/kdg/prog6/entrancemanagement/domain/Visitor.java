@@ -18,6 +18,12 @@ public class Visitor {
 	private Ticket.TicketUUID ticketUUID;
 	private State state;
 
+	public static Visitor defaultVisitor() {
+		var visitor = new Visitor();
+		visitor.setTicketUUID(new Ticket.TicketUUID(Ticket.LOST_TICKET));
+		return visitor;
+	}
+
 	public void enter() {
 		this.state = State.ENTERED;
 	}

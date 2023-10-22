@@ -13,6 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 public class Ticket {
+	public static UUID LOST_TICKET = UUID.fromString("00000000-0000-0000-0000-000000000000");
 	private TicketUUID ticketUUID;
 	private LocalDate validOn;
 

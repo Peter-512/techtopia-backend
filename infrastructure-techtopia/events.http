@@ -38,6 +38,11 @@ POST {{baseURL}}/visitor/leave/{{ticketUUID}}/gate/{{$uuid}}
 Authorization: Bearer {{access_token}}
 
 
+### leaving park with LOST ticket
+POST {{baseURL}}/visitor/leave/{{lostTicketID}}/gate/{{$uuid}}
+Authorization: Bearer {{access_token}}
+
+
 ### enter park with not valid ticket
 POST {{baseURL}}/visitor/enter/{{nonValidTicketID}}/gate/{{$uuid}}
 Authorization: Bearer {{access_token}}

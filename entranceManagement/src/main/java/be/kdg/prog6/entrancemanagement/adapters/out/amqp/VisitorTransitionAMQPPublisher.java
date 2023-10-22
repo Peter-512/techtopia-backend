@@ -20,7 +20,7 @@ import java.util.UUID;
 @Component
 @AllArgsConstructor
 @Slf4j
-public class VisitorLeftAMQPPublisher implements VisitorUpdatePort {
+public class VisitorTransitionAMQPPublisher implements VisitorUpdatePort {
 	private final RabbitTemplate rabbitTemplate;
 
 	private final ObjectMapper objectMapper;
