@@ -7,10 +7,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.retry.annotation.EnableRetry;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
 @EnableFeignClients
 @EnableCaching
+@EnableScheduling
 @EnableRetry
 @ComponentScan (excludeFilters = {
 		@ComponentScan.Filter (type = FilterType.REGEX, pattern = "be.kdg.prog6.*.*Application"),

@@ -1,8 +1,9 @@
-package be.kdg.prog6.infopoints.adapters.auth;
+package be.kdg.prog6.infopoints.adapters.config.auth;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -30,7 +31,9 @@ public class SecurityModuleConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http.cors(Customizer.withDefaults())
-		    .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+		    .authorizeHttpRequests((authorize) -> authorize
+				    .requestMatchers(HttpMethod.GET, "attractions/**").permitAll()
+				    .anyRequest().authenticated())
 		    .sessionManagement(mgmt -> mgmt.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
 		    .oauth2ResourceServer(rs -> rs.jwt(jwt -> jwtAuthenticationConverter()));
 		return http.build();

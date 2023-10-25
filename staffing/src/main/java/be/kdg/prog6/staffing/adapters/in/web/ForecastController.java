@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.retry.annotation.Retryable;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,6 +29,7 @@ public class ForecastController {
 	}
 
 	@CacheEvict (value = "weather", allEntries = true)
+	@Scheduled (fixedRateString = "86400000") // evict cache after 24 hours
 	@DeleteMapping (value = "/cache/weather")
 	public void evictWeatherCache() {
 		log.info("Evicting weather cache");
@@ -54,6 +56,7 @@ public class ForecastController {
 	}
 
 	@CacheEvict (value = "forecast", allEntries = true)
+	@Scheduled (fixedRateString = "86400000") // evict cache after 24 hours
 	@DeleteMapping (value = "/cache/forecast")
 	public void evictForecastCache() {
 		log.info("Evicting forecast cache");

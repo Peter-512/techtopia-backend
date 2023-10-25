@@ -12,7 +12,7 @@ import java.util.UUID;
 @Entity
 @Setter
 @Getter
-@Table (name = "visitor_gate_interaction")
+@Table (name = "visitor_gate_interactions")
 public class VisitorGateInteractionJpaEntity {
 	@Id
 	@GeneratedValue (strategy = GenerationType.UUID)

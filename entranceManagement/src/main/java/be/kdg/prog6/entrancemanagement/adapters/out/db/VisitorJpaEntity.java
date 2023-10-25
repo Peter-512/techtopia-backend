@@ -14,7 +14,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table (name = "entrance_visitor")
+@Table (name = "entrance_visitors")
 public class VisitorJpaEntity {
 
 	@Id

@@ -16,7 +16,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table (name = "entrance_ticket")
+@Table (name = "entrance_tickets")
 public class TicketJpaEntity {
 
 	@Id

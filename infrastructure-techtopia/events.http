@@ -84,3 +84,7 @@ Authorization: Bearer {{access_token}}
 ### emptying cache for visitor forecast
 DELETE {{baseURL}}/cache/forecast
 Authorization: Bearer {{access_token}}
+
+
+### get all attractions
+GET {{baseURL}}/attractions
