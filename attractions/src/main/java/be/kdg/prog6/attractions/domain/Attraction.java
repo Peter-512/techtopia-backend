@@ -11,13 +11,13 @@ import java.util.UUID;
 @ToString
 public class Attraction {
 	private AttractionUUID attractionUUID;
-	private int highThreshold;
+	private int threshold;
 	private int currentVisitors;
 	private THROUGHPUT throughput;
 	private int currentWaitingTime;
 
-	public Attraction(AttractionUUID attractionUUID, int highThreshold) {
-		this(attractionUUID, highThreshold, 0, THROUGHPUT.LOW, 0);
+	public Attraction(AttractionUUID attractionUUID, int threshold) {
+		this(attractionUUID, threshold, 0, THROUGHPUT.LOW, 0);
 	}
 
 	public void enqueue() {
@@ -41,16 +41,16 @@ public class Attraction {
 	}
 
 	public void adjustThroughput() {
-		if (isHighThroughput() && currentVisitors < highThreshold * 0.8) {
+		if (isHighThroughput() && currentVisitors < threshold * 0.8) {
 			setLowThroughput();
-		} else if (!isHighThroughput() && currentVisitors > highThreshold) {
+		} else if (!isHighThroughput() && currentVisitors > threshold) {
 			setHighThroughput();
 		}
 	}
 
 	public int calculateWaitingTime() {
 		int accelerator = isHighThroughput() ? 2 : 1;
-		return (currentVisitors * 20) / (highThreshold * accelerator);
+		return (currentVisitors * 20) / (threshold * accelerator);
 	}
 
 	public boolean hasWaitingTimeChanged() {

@@ -5,23 +5,14 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import java.util.UUID;
-
 @Mapper
 public interface AttractionMapper {
 	AttractionMapper INSTANCE = Mappers.getMapper(AttractionMapper.class);
 
-	@Mapping (source = "attractionUUID", target = "uuid")
+	@Mapping (source = "attractionUUID.uuid", target = "uuid")
 	AttractionJpaEntity map(Attraction attraction);
 
-	@Mapping (source = "uuid", target = "attractionUUID")
+	@Mapping (source = "uuid", target = "attractionUUID.uuid")
 	Attraction map(AttractionJpaEntity attractionJpaEntity);
 
-	default UUID map(Attraction.AttractionUUID uuid) {
-		return uuid.uuid();
-	}
-
-	default Attraction.AttractionUUID map(UUID uuid) {
-		return new Attraction.AttractionUUID(uuid);
-	}
 }

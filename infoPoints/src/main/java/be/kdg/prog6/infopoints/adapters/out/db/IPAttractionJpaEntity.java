@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -37,6 +36,5 @@ public class IPAttractionJpaEntity {
 	private List<Tag> tags;
 	private int minHeight;
 	private int minAge;
-	@ColumnDefault ("true")
 	private boolean isOpen;
 }

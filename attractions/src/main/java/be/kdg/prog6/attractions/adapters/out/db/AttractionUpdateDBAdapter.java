@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -22,6 +23,11 @@ public class AttractionUpdateDBAdapter implements AttractionUpdatePort, Attracti
 		final Optional<AttractionJpaEntity> optionalAttraction = attractionRepository.findById(uuid);
 		log.info("Attraction loaded: {}", optionalAttraction.get());
 		return optionalAttraction.map(mapper::map);
+	}
+
+	@Override
+	public List<Attraction> loadAllAttractions() {
+		return attractionRepository.findAll().stream().map(mapper::map).toList();
 	}
 
 	@Override

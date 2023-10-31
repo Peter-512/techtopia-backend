@@ -1,8 +1,8 @@
 package be.kdg.prog6.infopoints.adapters.out.db;
 
 import be.kdg.prog6.infopoints.domain.Attraction;
-import be.kdg.prog6.infopoints.ports.out.LoadAttractionPort;
-import be.kdg.prog6.infopoints.ports.out.UpdateAttractionPort;
+import be.kdg.prog6.infopoints.ports.out.LoadPort;
+import be.kdg.prog6.infopoints.ports.out.UpdatePort;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -14,7 +14,7 @@ import java.util.UUID;
 @Repository
 @AllArgsConstructor
 @Slf4j
-public class IPAttractionPortPortDBAdapter implements LoadAttractionPort, UpdateAttractionPort {
+public class IPAttractionPortDBAdapter implements LoadPort<Attraction>, UpdatePort<Attraction> {
 	private final IPAttractionRepository attractionRepository;
 	private final IPAttractionMapper iPAttractionMapper = IPAttractionMapper.INSTANCE;
 
@@ -25,7 +25,7 @@ public class IPAttractionPortPortDBAdapter implements LoadAttractionPort, Update
 
 	@Override
 	public List<Attraction> loadAll() {
-		return attractionRepository.findAll().stream().map(iPAttractionMapper::map).toList();
+		return attractionRepository.getAllAttractionsWithTags().stream().map(iPAttractionMapper::map).toList();
 	}
 
 	@Override

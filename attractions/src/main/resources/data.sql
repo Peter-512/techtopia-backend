@@ -1,4 +1,4 @@
-INSERT INTO attractions (uuid, current_visitors, high_threshold, throughput)
+INSERT INTO attractions (uuid, current_visitors, threshold, throughput)
 VALUES ('abfa469e-9642-4ea6-ba99-cc2aafeb977c', 0, 50, 'LOW'),
        ('018b3dcc-21e4-71b1-94da-8bfca7b85b51', 0, 100, 'LOW'),
        ('018b3dcc-3933-70c1-8427-fcff8c74d27b', 0, 200, 'LOW'),

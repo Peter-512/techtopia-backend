@@ -88,3 +88,16 @@ Authorization: Bearer {{access_token}}
 
 ### get all attractions
 GET {{baseURL}}/attractions
+
+
+### get all gates
+GET {{baseURL}}/gates
+
+
+### get all admin attractions
+GET {{baseURL}}/admin/attractions
+Authorization: Bearer {{access_token}}
+
+
+### get similar attractions
+GET {{baseURL}}/attractions/{{attractionID}}/similar

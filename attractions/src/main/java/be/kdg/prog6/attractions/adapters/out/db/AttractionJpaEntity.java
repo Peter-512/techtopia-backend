@@ -24,7 +24,7 @@ public class AttractionJpaEntity {
 	@JdbcTypeCode (Types.VARCHAR)
 	private UUID uuid;
 
-	private int highThreshold;
+	private int threshold;
 
 	private int currentVisitors;
 
