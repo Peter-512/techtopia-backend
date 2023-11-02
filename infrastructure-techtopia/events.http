@@ -4,7 +4,7 @@ POST http://localhost:8180/realms/techtopia/protocol/openid-connect/token HTTP/1
 Content-Type: application/x-www-form-urlencoded
 
 client_id = techtopia-be &
-client_secret = DfitZnoTBv2a6VQPCBnwBspWSZSSHN8N &
+client_secret = 5KM22q9GmFd6gfbFfdAbbzet7oZRxyE1 &
 username = peter &
 password = password &
 grant_type = password &
@@ -101,3 +101,15 @@ Authorization: Bearer {{access_token}}
 
 ### get similar attractions
 GET {{baseURL}}/attractions/{{attractionID}}/similar
+
+
+### update attraction
+POST {{baseURL}}/attractions/{{attractionID}}
+Authorization: Bearer {{access_token}}
+Content-Type: application/json
+
+{
+  "attractionUUID": "{{attractionID}}",
+  "throughput": "HIGH",
+  "threshold": 200
+}
