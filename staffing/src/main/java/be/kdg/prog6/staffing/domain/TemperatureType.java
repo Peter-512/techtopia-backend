@@ -1,8 +1,6 @@
 package be.kdg.prog6.staffing.domain;
 
-public enum Weather {
+public enum TemperatureType {
 	HOT,
-	COLD,
-	RAINY,
-	NORMAL
+	COLD
 }

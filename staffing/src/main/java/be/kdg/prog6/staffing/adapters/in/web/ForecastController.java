@@ -61,4 +61,10 @@ public class ForecastController {
 	public void evictForecastCache() {
 		log.info("Evicting forecast cache");
 	}
+
+	@Cacheable (value = "holiday", key = "#date")
+	@GetMapping (value = "/holidays/{date}")
+	public ResponseEntity<HolidayDTO> getHoliday(@PathVariable @DateTimeFormat (iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+		return feignForecastController.getHoliday(date);
+	}
 }

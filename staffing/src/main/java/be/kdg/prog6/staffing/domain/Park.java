@@ -12,7 +12,7 @@ public class Park {
 
 	private static final Park INSTANCE = new Park();
 	@Setter
-	private Weather weather;
+	private WeatherType weatherType;
 	private int visitors;
 
 	private Park() {

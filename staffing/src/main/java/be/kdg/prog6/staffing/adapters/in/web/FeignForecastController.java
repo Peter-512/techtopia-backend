@@ -16,5 +16,6 @@ public interface FeignForecastController {
 	@GetMapping (value = "/forecast/date/{date}")
 	ResponseEntity<VisitorForecastDTO> getForecast(@PathVariable @DateTimeFormat (iso = DateTimeFormat.ISO.DATE) LocalDate date);
 
-
+	@GetMapping (value = "/holidays/date/{date}")
+	ResponseEntity<HolidayDTO> getHoliday(@PathVariable @DateTimeFormat (iso = DateTimeFormat.ISO.DATE) LocalDate date);
 }

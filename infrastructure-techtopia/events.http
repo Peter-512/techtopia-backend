@@ -113,3 +113,13 @@ Content-Type: application/json
   "throughput": "HIGH",
   "threshold": 200
 }
+
+
+### get holiday
+GET {{baseURL}}/holidays/2023-12-25
+Authorization: Bearer {{access_token}}
+
+
+### get refreshment stand forecast
+GET {{baseURL}}/refreshment-stands/2023-12-26
+Authorization: Bearer {{access_token}}
