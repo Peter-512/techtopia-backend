@@ -45,7 +45,7 @@ public class SecurityConfig {
 		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
 		var config = new CorsConfiguration();
 		config.setAllowedOriginPatterns(List.of("*"))
-		      .setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "HEAD"));
+		      .setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"));
 		source.registerCorsConfiguration("/**", config);
 		return source;
 	}
