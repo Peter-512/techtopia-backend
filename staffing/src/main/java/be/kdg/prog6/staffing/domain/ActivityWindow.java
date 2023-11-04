@@ -1,6 +1,7 @@
 package be.kdg.prog6.staffing.domain;
 
 import lombok.AllArgsConstructor;
+import lombok.ToString;
 
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -8,6 +9,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
+@ToString
 public class ActivityWindow {
 	private final List<GateInteractionActivity> activities = new ArrayList<>();
 
@@ -32,7 +34,6 @@ public class ActivityWindow {
 	private long calculateVisitorDuration(List<GateInteractionActivity> activities) {
 		LocalDateTime enterTime = null;
 		long totalDuration = 0;
-
 		for (GateInteractionActivity activity : activities) {
 			if (activity.action() == GateInteractionAction.ENTERED) {
 				enterTime = activity.pit();
@@ -56,6 +57,10 @@ public class ActivityWindow {
 		                 .max(Comparator.comparing(GateInteractionActivity::pit))
 		                 .orElseThrow(IllegalStateException::new)
 		                 .pit();
+	}
+
+	public int size() {
+		return activities.size();
 	}
 
 	public boolean isEmpty() {

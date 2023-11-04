@@ -9,7 +9,7 @@ import java.util.UUID;
 public interface VisitorGateInteractionPort {
 	void saveVisitorGateInteraction(VisitorGateInteraction visitorGateInteraction);
 
-	ActivityWindow getGateBetween(UUID uuid, LocalDateTime start, LocalDateTime end);
+	ActivityWindow getGateBetween(LocalDateTime start, LocalDateTime end);
 
 	ActivityWindow getGateAfter(UUID uuid, LocalDateTime start);
 }

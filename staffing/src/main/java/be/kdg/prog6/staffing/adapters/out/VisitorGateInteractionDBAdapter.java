@@ -25,15 +25,18 @@ public class VisitorGateInteractionDBAdapter implements VisitorGateInteractionPo
 	}
 
 	@Override
-	public ActivityWindow getGateBetween(UUID uuid, LocalDateTime start, LocalDateTime end) {
-		if (end.isBefore(start))
+	public ActivityWindow getGateBetween(LocalDateTime start, LocalDateTime end) {
+		if (end.isBefore(start)) {
+			log.warn("End date is before start date");
 			return new ActivityWindow();
+		}
 
 		ActivityWindow activityWindow = new ActivityWindow();
-		visitorGateInteractionRepository.findByGateUUIDAndPitBetween(uuid, start, end)
+		visitorGateInteractionRepository.findByPitBetween(start, end)
 		                                .stream()
 		                                .map(activityMapper::map)
 		                                .forEach(activityWindow::add);
+		log.info("Found {} activities", activityWindow.size());
 		return activityWindow;
 	}
 

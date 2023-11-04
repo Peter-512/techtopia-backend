@@ -123,3 +123,16 @@ Authorization: Bearer {{access_token}}
 ### get refreshment stand forecast
 GET {{baseURL}}/refreshment-stands/2023-12-26
 Authorization: Bearer {{access_token}}
+
+
+### get average duration of stay
+< {%
+	let startDate = new Date();
+	startDate.setHours(0, 0, 0, 0);
+	let endDate = new Date();
+	endDate.setHours(23, 59, 59, 999);
+	request.variables.set("startDate", startDate.toISOString());
+	request.variables.set("endDate", endDate.toISOString());
+%}
+GET {{baseURL}}/analytics/average-visit-duration/start/{{startDate}}/end/{{endDate}}
+Authorization: Bearer {{access_token}}
