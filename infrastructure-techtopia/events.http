@@ -136,3 +136,7 @@ Authorization: Bearer {{access_token}}
 %}
 GET {{baseURL}}/analytics/average-visit-duration/start/{{startDate}}/end/{{endDate}}
 Authorization: Bearer {{access_token}}
+
+
+### get all refreshment stands
+GET {{baseURL}}/refreshment-stands

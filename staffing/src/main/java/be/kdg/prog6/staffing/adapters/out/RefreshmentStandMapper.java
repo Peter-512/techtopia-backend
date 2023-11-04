@@ -14,7 +14,13 @@ public interface RefreshmentStandMapper {
 	@Mapping (target = "uuid", ignore = true)
 	RefreshmentStandJpaEntity map(CreateRefreshmentStandCommand command);
 
+	@Mapping (target = "coordinates.y", source = "y")
+	@Mapping (target = "coordinates.x", source = "x")
+	@Mapping (target = "uuid.uuid", source = "uuid")
 	RefreshmentStand map(RefreshmentStandJpaEntity entity);
 
+	@Mapping (target = "y", source = "coordinates.y")
+	@Mapping (target = "x", source = "coordinates.x")
+	@Mapping (target = "uuid", source = "uuid.uuid")
 	RefreshmentStandDTO map(RefreshmentStand refreshmentStand);
 }

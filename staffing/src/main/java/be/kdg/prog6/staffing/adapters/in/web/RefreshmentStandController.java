@@ -7,6 +7,7 @@ import be.kdg.prog6.staffing.ports.in.CreateRefreshmentStandCommand;
 import be.kdg.prog6.staffing.ports.in.CreateRefreshmentStandUseCase;
 import be.kdg.prog6.staffing.ports.in.FetchRefreshmentStandsUseCase;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
+@Slf4j
 public class RefreshmentStandController {
 	private final ForecastController forecastController;
 	private final WeatherStrategy weatherStrategy;
@@ -46,7 +48,7 @@ public class RefreshmentStandController {
 	}
 
 	@PostMapping ("/refreshment-stands/open")
-	public ResponseEntity<Void> openRefreshmentStands(@RequestBody RefreshmentStandDTO refreshmentStandDTO) {
+	public ResponseEntity<Void> openRefreshmentStands(@RequestBody RefreshmentStandDTOin refreshmentStandDTO) {
 		createRefreshmentStandUseCase.createRefreshmentStand(new CreateRefreshmentStandCommand(refreshmentStandDTO.getName(), refreshmentStandDTO.getCategory(), refreshmentStandDTO.getX(), refreshmentStandDTO.getY()));
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
@@ -57,6 +59,7 @@ public class RefreshmentStandController {
 		                                                     .stream()
 		                                                     .map(refreshmentStandMapper::map)
 		                                                     .toList();
+		log.info("{}", refreshmentStands);
 		return ResponseEntity.ok(refreshmentStands);
 	}
 }

@@ -33,6 +33,7 @@ public class SecurityConfig {
 		http.cors(Customizer.withDefaults())
 		    .authorizeHttpRequests((authorize) -> authorize
 				    .requestMatchers(HttpMethod.GET, "attractions/**").permitAll()
+				    .requestMatchers(HttpMethod.GET, "refreshment-stands").permitAll()
 				    .requestMatchers(HttpMethod.GET, "gates/**").permitAll()
 				    .anyRequest().authenticated())
 		    .sessionManagement(mgmt -> mgmt.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
